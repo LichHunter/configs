@@ -466,6 +466,7 @@ alias music='mpd; ncmpcpp'
 alias emacs="emacsclient -c -a 'emacs'"
 alias ec='vim ~/.zshrc'
 alias sc='source ~/.zshrc'
+alias sudo='doas'
 
 export JAVA_HOME="/usr/lib/jvm/default"
 export PATH=$PATH:~/.emacs.d/bin
