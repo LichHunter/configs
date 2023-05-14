@@ -77,6 +77,7 @@
 
 (after! lsp-java
   (require 'lsp-java-boot)
+  (require 'dap-java)
 
   ;; to enable the lenses
   (add-hook 'lsp-mode-hook #'lsp-lens-mode)
@@ -93,4 +94,29 @@
                           ,(concat "-javaagent:" lombok-jar-path)
                           )
         )
+  ;; (delete-directory lsp-java-workspace-dir t)
   )
+
+(general-auto-unbind-keys)
+(map! :leader
+      (:prefix ("m" . "my")
+               "c" #'comment-dwim
+               (:prefix ("d" . "dap")
+                        "c" #'dap-java-run-test-class
+                        "m" #'dap-java-run-test-method
+                        )
+               (:prefix ("l" . "lsp")
+                        "j" #'lsp-jt-browser
+                        "i" #'lsp-java-organize-imports
+                        "r" #'lsp-rename
+                        "g d" #'lsp-goto-type-definition
+                        )
+               )
+      )
+
+(setq lsp-java-format-settings-url "https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml")
+
+;; add map for lsp-jt-browser
+;; + lsp-jt-browser
+;; + dap-java-run-test-class
+;; + dap-java-run-test-method

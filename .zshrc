@@ -463,7 +463,6 @@ alias install='sudo pacman -S'
 alias update='sudo pacman -Suyyy'
 alias remove='sudo pacman -R'
 alias music='mpd; ncmpcpp'
-alias emacs="emacsclient -c -a 'emacs'"
 alias ec='vim ~/.zshrc'
 alias sc='source ~/.zshrc'
 alias sudo='doas'
@@ -491,3 +490,7 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
