@@ -83,7 +83,6 @@
   (add-hook 'lsp-mode-hook #'lsp-lens-mode)
   (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
   (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
-        (add-hook 'conf-javaprop-mode-hook #'lsp)
   (setf lombok-jar-path "/home/omen/.m2/repository/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar")
   (setq lsp-java-vmargs `(
                           "-XX:+UseParallelGC"
@@ -95,14 +94,8 @@
                           ,(concat "-javaagent:" lombok-jar-path)
                           )
         )
-  (add-hook 'java-mode-hook (lambda () (setq c-basic-offset 4
-                                        tab-width 4
-                                        indent-tabs-mode 'nil)))
-  (setq lsp-java-format-settings-url "https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml")
-  (setq lsp-java-format-settings-profile "GoogleStyle")
+  ;; (delete-directory lsp-java-workspace-dir t)
   )
-;;(setq c-basic-offset 4)
-;;(setq-default tab-width 4)
 
 (general-auto-unbind-keys)
 (map! :leader
@@ -119,11 +112,9 @@
                         "g d" #'lsp-goto-type-definition
                         )
                )
-      "p f" 'nil
-      "p f t" #'projectile-find-test-file
       )
 
-
+(setq lsp-java-format-settings-url "https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml")
 
 ;; add map for lsp-jt-browser
 ;; + lsp-jt-browser
