@@ -35,6 +35,7 @@ import XMonad.Util.Run (spawnPipe)
 
 myStartupHook = do
   spawn "$HOME/.xmonad/scripts/autostart.sh"
+  spawn "setxkbmap us,ru,ua -option grp:alt_shift_toggle"
   setWMName "LG3D"
 
 normBord = "#4c566a"
@@ -111,87 +112,19 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
     ----------------------------------------------------------------------
     -- SUPER + FUNCTION KEYS
 
-    [ ((modMask, xK_e), spawn $ "atom"),
-      ((modMask, xK_c), spawn $ "conky-toggle"),
-      ((modMask, xK_f), sendMessage $ Toggle NBFULL),
+    [ ((modMask, xK_f), sendMessage $ Toggle NBFULL),
       ((modMask, xK_h), spawn $ "urxvt 'htop task manager' -e htop"),
       ((modMask, xK_m), spawn $ "pragha"),
-      ((modMask, xK_q), kill),
       ((modMask, xK_r), spawn $ "rofi-theme-selector"),
-      ((modMask, xK_t), spawn $ "urxvt"),
       ((modMask, xK_v), spawn $ "pavucontrol"),
-      ((modMask, xK_y), spawn $ "polybar-msg cmd toggle"),
       ((modMask, xK_x), spawn $ "archlinux-logout"),
       ((modMask, xK_Escape), spawn $ "xkill"),
       ((modMask, xK_Return), spawn $ "alacritty"),
-      ((modMask, xK_F1), spawn $ "vivaldi-stable"),
-      ((modMask, xK_F2), spawn $ "atom"),
-      ((modMask, xK_F3), spawn $ "inkscape"),
-      ((modMask, xK_F4), spawn $ "gimp"),
-      ((modMask, xK_F5), spawn $ "meld"),
-      ((modMask, xK_F6), spawn $ "vlc --video-on-top"),
-      ((modMask, xK_F7), spawn $ "virtualbox"),
-      ((modMask, xK_F8), spawn $ "thunar"),
-      ((modMask, xK_F9), spawn $ "evolution"),
-      ((modMask, xK_F10), spawn $ "spotify"),
-      ((modMask, xK_F11), spawn $ "rofi -theme-str 'window {width: 100%;height: 100%;}' -show drun"),
-      ((modMask, xK_F12), spawn $ "rofi -show drun"),
-      -- FUNCTION KEYS
-      ((0, xK_F12), spawn $ "xfce4-terminal --drop-down"),
-      -- SUPER + SHIFT KEYS
-
       ((modMask .|. shiftMask, xK_Return), spawn $ "thunar"),
       ((modMask .|. shiftMask, xK_d), spawn $ "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'"),
-      ((modMask, xK_d), spawn $ "~/.xmonad/launcher/launcher.sh"),
+      ((modMask, xK_p), spawn $ "~/.config/polybar/colorblocks/scripts/launcher.sh"),
       ((modMask .|. shiftMask, xK_r), spawn $ "xmonad --recompile && xmonad --restart"),
       ((modMask .|. shiftMask, xK_q), kill),
-      -- , ((modMask .|. shiftMask , xK_x ), io (exitWith ExitSuccess))
-
-      -- CONTROL + ALT KEYS
-
-      ((controlMask .|. mod1Mask, xK_Next), spawn $ "conky-rotate -n"),
-      ((controlMask .|. mod1Mask, xK_Prior), spawn $ "conky-rotate -p"),
-      ((controlMask .|. mod1Mask, xK_a), spawn $ "xfce4-appfinder"),
-      ((controlMask .|. mod1Mask, xK_b), spawn $ "thunar"),
-      ((controlMask .|. mod1Mask, xK_c), spawn $ "catfish"),
-      ((controlMask .|. mod1Mask, xK_e), spawn $ "archlinux-tweak-tool"),
-      ((controlMask .|. mod1Mask, xK_f), spawn $ "firefox"),
-      ((controlMask .|. mod1Mask, xK_g), spawn $ "chromium -no-default-browser-check"),
-      ((controlMask .|. mod1Mask, xK_i), spawn $ "nitrogen"),
-      ((controlMask .|. mod1Mask, xK_k), spawn $ "archlinux-logout"),
-      ((controlMask .|. mod1Mask, xK_l), spawn $ "archlinux-logout"),
-      ((controlMask .|. mod1Mask, xK_m), spawn $ "xfce4-settings-manager"),
-      ((controlMask .|. mod1Mask, xK_o), spawn $ "$HOME/.xmonad/scripts/picom-toggle.sh"),
-      ((controlMask .|. mod1Mask, xK_p), spawn $ "pamac-manager"),
-      ((controlMask .|. mod1Mask, xK_r), spawn $ "rofi-theme-selector"),
-      ((controlMask .|. mod1Mask, xK_s), spawn $ "spotify"),
-      ((controlMask .|. mod1Mask, xK_t), spawn $ "alacritty"),
-      ((controlMask .|. mod1Mask, xK_u), spawn $ "pavucontrol"),
-      ((controlMask .|. mod1Mask, xK_v), spawn $ "vivaldi-stable"),
-      ((controlMask .|. mod1Mask, xK_w), spawn $ "arcolinux-welcome-app"),
-      ((controlMask .|. mod1Mask, xK_Return), spawn $ "alacritty"),
-      -- ALT + ... KEYS
-
-      ((mod1Mask, xK_f), spawn $ "variety -f"),
-      ((mod1Mask, xK_n), spawn $ "variety -n"),
-      ((mod1Mask, xK_p), spawn $ "variety -p"),
-      ((mod1Mask, xK_r), spawn $ "xmonad --restart"),
-      ((mod1Mask, xK_t), spawn $ "variety -t"),
-      ((mod1Mask, xK_Up), spawn $ "variety --pause"),
-      ((mod1Mask, xK_Down), spawn $ "variety --resume"),
-      ((mod1Mask, xK_Left), spawn $ "variety -p"),
-      ((mod1Mask, xK_Right), spawn $ "variety -n"),
-      ((mod1Mask, xK_F2), spawn $ "xfce4-appfinder --collapsed"),
-      ((mod1Mask, xK_F3), spawn $ "xfce4-appfinder"),
-      --VARIETY KEYS WITH PYWAL
-
-      ((mod1Mask .|. shiftMask, xK_f), spawn $ "variety -f && wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&"),
-      ((mod1Mask .|. shiftMask, xK_n), spawn $ "variety -n && wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&"),
-      ((mod1Mask .|. shiftMask, xK_p), spawn $ "variety -p && wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&"),
-      ((mod1Mask .|. shiftMask, xK_t), spawn $ "variety -t && wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&"),
-      ((mod1Mask .|. shiftMask, xK_u), spawn $ "wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&"),
-      --CONTROL + SHIFT KEYS
-
       ((controlMask .|. shiftMask, xK_Escape), spawn $ "xfce4-taskmanager"),
       --SCREENSHOTS
 
@@ -211,19 +144,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
       ((0, xF86XK_MonBrightnessUp), spawn $ "xbacklight -inc 5"),
       -- Decrease brightness
       ((0, xF86XK_MonBrightnessDown), spawn $ "xbacklight -dec 5"),
-      -- Alternative to increase brightness
-
-      -- Increase brightness
-      -- , ((0, xF86XK_MonBrightnessUp),  spawn $ "brightnessctl s 5%+")
-
-      -- Decrease brightness
-      -- , ((0, xF86XK_MonBrightnessDown), spawn $ "brightnessctl s 5%-")
-
-      --  , ((0, xF86XK_AudioPlay), spawn $ "mpc toggle")
-      --  , ((0, xF86XK_AudioNext), spawn $ "mpc next")
-      --  , ((0, xF86XK_AudioPrev), spawn $ "mpc prev")
-      --  , ((0, xF86XK_AudioStop), spawn $ "mpc stop")
-
       ((0, xF86XK_AudioPlay), spawn $ "playerctl play-pause"),
       ((0, xF86XK_AudioNext), spawn $ "playerctl next"),
       ((0, xF86XK_AudioPrev), spawn $ "playerctl previous"),
@@ -233,8 +153,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
 
       -- Cycle through the available layout algorithms.
       ((modMask, xK_space), sendMessage NextLayout),
-      --Focus selected desktop
-      ((mod1Mask, xK_Tab), nextWS),
       --Focus selected desktop
       ((modMask, xK_Tab), nextWS),
       --Focus selected desktop
@@ -277,15 +195,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
       ]
       ++
       -- ctrl-shift-{w,e,r}, Move client to screen 1, 2, or 3
-      [ ((m .|. controlMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0 ..],
+      [ ((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
+        | (key, sc) <- zip [xK_t, xK_y, xK_u] [0 ..],
           (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
       ]
-
--- [ ((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
---   | (key, sc) <- zip [xK_Left, xK_Right] [0 ..],
---     (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
--- ]
 
 main :: IO ()
 main = do
@@ -301,7 +214,7 @@ main = do
     --qwerty users use this line
     myBaseConfig
       { startupHook = myStartupHook,
-        layoutHook = gaps [(U, 35), (D, 5), (R, 5), (L, 5)] $ myLayout ||| layoutHook myBaseConfig,
+        layoutHook = gaps [(U, 5), (D, 5), (R, 5), (L, 5)] $ myLayout ||| layoutHook myBaseConfig,
         manageHook = manageSpawn <+> myManageHook <+> manageHook myBaseConfig,
         modMask = myModMask,
         borderWidth = myBorderWidth,
